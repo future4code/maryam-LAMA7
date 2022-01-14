@@ -51,7 +51,5 @@ export interface BandInputDTO{
     responsible: string;
 }
 
-export type Role = {
-    role: string
-}
+
 

@@ -32,7 +32,7 @@ export class BandBusiness {
         await bandDataBase.createBand(id, band.name, band.music_genre, band.responsible);
     }
 
-    async getBandById(token: string, sort: string, order: string) {
+    async getBandById(token: string, name: string) {
 
        if(!token) {
         throw new Error("Informe um token válido!")
@@ -45,13 +45,13 @@ export class BandBusiness {
             }
 
             const bandDataBase = new BandDatabase();
-             await bandDataBase.getBandById(tokenData.id, sort, order);
+            const band = await bandDataBase.getBandById(tokenData.id, name);
 
-            if (!bandDataBase) {
+            if (!band) {
                 throw new Error("Não tem banda registrada.")
             }
 
-            return bandDataBase
+            return band
     }
 
 }

@@ -18,7 +18,10 @@ export class BandController {
             const token = req.headers.authorization as string
             const band = await bandBusiness.createBand(input, token);
 
-            res.status(200).send( band );
+            res.status(200).send({ 
+                message: "Banda registrada com sucesso.",
+                band 
+            });
 
         } catch (error: any) {
             res.status(400).send({ error: error.message });
@@ -30,11 +33,10 @@ export class BandController {
     async getBandById(req: Request, res: Response) {
         try {
             const token = req.headers.authorization as string
-            const sort = req.query.sort === "id" ? "id" : "name"
-            const order = req.query.order === "DESC" ? "DESC" : "ASC"
+            const name = req.query.name === "name" ? "name" : "id"
            
             const bandBusiness = new BandBusiness();
-            const band = await bandBusiness.getBandById(token, sort, order)
+            const band = await bandBusiness.getBandById(token, name)
 
             res.status(200).send(band)
         } catch (error: any) {

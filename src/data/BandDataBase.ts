@@ -25,18 +25,19 @@ export class BandDatabase extends BaseDatabase {
       }
     }
   
-    public async getBandById(id: string, sort: string, order:string): Promise<Band> {
+    public async getBandById(id: string, name: string): Promise<Band[]> {
       try {
         const result = await this.getConnection()
           .select("*")
           .from(BandDatabase.TABLE_NAME)
-          .orderBy(sort, order)
+          .orderBy(name)
         
-        return Band.toBandModel(result[0]);
+        return result[0] && Band.toBandModel(result[0]);
         
       } catch (error: any) {
         throw new Error(error.slqMessage || error.message)
       }
+
     }
     
   

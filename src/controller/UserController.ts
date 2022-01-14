@@ -17,7 +17,9 @@ export class UserController {
             const userBusiness = new UserBusiness();
             const token = await userBusiness.createUser(input);
 
-            res.status(200).send({ token });
+            res.status(200).send({ 
+                message: "Usuário criado com sucesso.",
+                token });
 
         } catch (error: any) {
             res.status(400).send({ error: error.message });
@@ -37,7 +39,6 @@ export class UserController {
 
             const userBusiness = new UserBusiness();
             const token = await userBusiness.getUserByEmail(loginData);
-            console.log(token)
 
             res.status(200).send({ 
                 message: "Usuário logado!",
