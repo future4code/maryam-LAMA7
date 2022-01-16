@@ -30,7 +30,7 @@ export class BandDatabase extends BaseDatabase {
         const result = await this.getConnection()
           .select("*")
           .from(BandDatabase.TABLE_NAME)
-          .orderBy(name)
+          .orderBy(name, id)
         
         return result[0] && Band.toBandModel(result[0]);
         

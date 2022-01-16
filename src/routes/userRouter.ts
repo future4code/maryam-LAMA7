@@ -11,6 +11,7 @@ const bandController = new BandController()
 const showController = new ShowController()
 
 userRouter.get("/lama/band", bandController.getBandById)
+userRouter.get("/lama/show", showController.getShowsByWeekDayController)
 userRouter.post("/lama/signup", userController.signup);
 userRouter.post("/lama/login", userController.login);
 userRouter.post("/lama/band", bandController.createBand)

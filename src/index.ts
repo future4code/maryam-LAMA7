@@ -11,6 +11,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/band", userRouter);
+app.use("/show", userRouter);
 
 const server = app.listen(3000, () => {
     if (server) {

@@ -1,7 +1,11 @@
 import {Request, Response} from "express"
 import { ShowBusiness } from "../business/ShowBusiness";
+import { BandDatabase } from "../data/BandDataBase";
 import { BaseDatabase } from "../data/BaseDatabase";
-import { ShowInputDTO } from "../model/Show";
+import { ShowDatabase } from "../data/ShowDataBase";
+import { Show, ShowInputDTO } from "../model/Show";
+import { Authenticator } from "../services/Authenticator";
+import { IdGenerator } from "../services/IdGenerator";
 
 export class ShowController {
 
@@ -30,5 +34,23 @@ export class ShowController {
 
         await BaseDatabase.destroyConnection();
     }
+
+    async getShowsByWeekDayController(req: Request, res: Response) {
+
+        try {
+            const weekDay = Show.week_dayEnum(req.query.weekDay as string)
+
+            const showBusiness = new ShowBusiness()
+
+            const shows = await showBusiness.getShowsByWeekDayBusiness(weekDay)
+            res.status(200).send(shows)
+
+        } catch (error: any) {
+            res.status(400).send({ error: error.message });
+        }
+        
+            await BaseDatabase.destroyConnection();
+    }
+
 
 }
